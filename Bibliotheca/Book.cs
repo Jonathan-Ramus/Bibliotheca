@@ -30,6 +30,13 @@
             Validate();
         }
 
+        public Book(Book b)
+        {
+            this.Id = b.Id;
+            _title = b.Title;
+            _price = b.Price;
+        }
+
         private void Validate()
         {
             ValidateTitle(_title);
