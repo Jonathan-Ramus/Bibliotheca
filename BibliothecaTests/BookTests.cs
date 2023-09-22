@@ -20,7 +20,7 @@ namespace Bibliotheca.Tests
             Assert.AreEqual(777, book.Price);
             Assert.AreEqual("Id: None, Title: The Bible, Price: 777", book.ToString());
 
-            Book book2 = new("The Bible", 777);
+            Book book2 = new(book);
             Assert.AreEqual(book, book2);
             Assert.IsTrue(book.Equals(book2));
             Assert.IsTrue(book.GetHashCode() == book2.GetHashCode());
