@@ -15,13 +15,15 @@ namespace Bibliotheca.Tests
         public void BookTest()
         {
             Book book = new("The Bible", 777);
-            Assert.AreEqual(0, book.Id);
+            Assert.AreEqual(null, book.Id);
             Assert.AreEqual("The Bible", book.Title);
             Assert.AreEqual(777, book.Price);
-            Assert.AreEqual("Id: 0, Title: The Bible, Price: 777", book.ToString());
+            Assert.AreEqual("Id: None, Title: The Bible, Price: 777", book.ToString());
 
             Book book2 = new("The Bible", 777);
             Assert.AreEqual(book, book2);
+            Assert.IsTrue(book.Equals(book2));
+            Assert.IsTrue(book.GetHashCode() == book2.GetHashCode());
 
             Book book3 = new("House of Leaves", 400, id:3);
             Assert.AreEqual(3, book3.Id);

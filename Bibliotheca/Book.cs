@@ -9,7 +9,7 @@
         private string _title;
         private int _price;
         
-        public int Id { get; set; }
+        public int? Id { get; set; }
         
         public string Title
         {
@@ -22,7 +22,7 @@
             set { ValidatePrice(value); _price = value; }
         }
         
-        public Book(string title, int price, int id = 0)
+        public Book(string title, int price, int? id = null)
         {
             Id = id;
             _title = title;
@@ -57,7 +57,7 @@
 
         public override string ToString()
         {
-            return string.Format("Id: {0}, Title: {1}, Price: {2}", Id, _title, _price);
+            return string.Format("Id: {0}, Title: {1}, Price: {2}", Id == null ? "None" : Id, _title, _price);
         }
 
         public override bool Equals(object? obj)
