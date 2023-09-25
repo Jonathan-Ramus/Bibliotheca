@@ -9,25 +9,35 @@ namespace Bibliotheca
     public class BooksRepository : IBooksRepository
     {
         private readonly List<Book> _books = new();
+        private int _nextId = 1;
         public const int None = 0;
-        public Book? Add(Book book)
+        public Book Add(Book book)
         {
-            throw new NotImplementedException();
+            if (book == null) throw new ArgumentNullException(nameof(book));
+
+            if (_books.Contains(book)) return book;
+
+            book.Id = _nextId++;
+            _books.Add(book);
+            return book;
         }
 
-        public Book? Delete(Book book)
+        public Book? Delete(int id)
         {
-            throw new NotImplementedException();
+            Book? book = GetById(id);
+            if (book == null) throw new ArgumentNullException(nameof(book));
+
+            return _books.Remove(book) ? book : null;
         }
 
-        public IEnumerable<Book> Get(Range? priceFilter = null, SortMethod? sortMethod = null)
+        public IEnumerable<Book> Get(int minPrice = Book.PRICE_MIN, int maxPrice = Book.PRICE_MAX, SortMethod? sortMethod = null)
         {
             throw new NotImplementedException();
         }
 
         public Book? GetById(int id)
         {
-            throw new NotImplementedException();
+            return _books.FirstOrDefault(b => b.Id == id);
         }
 
         public Book? Update(Book book)

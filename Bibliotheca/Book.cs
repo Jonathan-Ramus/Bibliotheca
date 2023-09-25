@@ -2,9 +2,9 @@
 {
     public class Book
     {
-        private const int TITLE_MIN_LENGTH = 3;
-        private const int PRICE_MIN = 0;
-        private const int PRICE_MAX = 1200;
+        public const int TITLE_MIN_LENGTH = 3;
+        public const int PRICE_MIN = 1;
+        public const int PRICE_MAX = 1200;
 
         private string _title;
         private int _price;
