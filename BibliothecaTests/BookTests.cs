@@ -22,6 +22,7 @@ namespace Bibliotheca.Tests
 
             Book book2 = new(book);
             Assert.AreEqual(book, book2);
+            Assert.AreNotSame(book, book2);
             Assert.IsTrue(book.Equals(book2));
             Assert.IsTrue(book.GetHashCode() == book2.GetHashCode());
 
@@ -36,10 +37,10 @@ namespace Bibliotheca.Tests
 
             Assert.ThrowsException<ArgumentNullException>(() => book.Title = null);
             Assert.ThrowsException<ArgumentException>(() => book.Title = "Hi");
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => book.Price = -1);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => book.Price = 0);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => book.Price = 1201);
             book.Title = "New Title";
-            book.Price = 0;
+            book.Price = 1;
             book.Price = 1200;
         }
     }

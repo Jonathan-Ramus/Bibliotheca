@@ -19,6 +19,6 @@ namespace Bibliotheca
         public abstract Book? GetById(int id);
         public abstract Book Add(Book book);
         public abstract Book? Delete(int id);
-        public abstract Book? Update(Book book);
+        public abstract Book? Update(int id, Book values);
     }
 }

@@ -71,12 +71,12 @@
         {
             var other = obj as Book;
             if (other == null) return false;
-            return other.Id == this.Id && other.Title == this.Title && other.Price == this.Price;
+            return other.Title == this.Title && other.Price == this.Price;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Id, _title, _price);
+            return HashCode.Combine(_title, _price);
         }
     }
 }

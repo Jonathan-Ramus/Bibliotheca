@@ -15,34 +15,50 @@ namespace Bibliotheca
         {
             if (book == null) throw new ArgumentNullException(nameof(book));
 
-            if (_books.Contains(book)) return book;
+            Book? exists = _books.FirstOrDefault(b => b == book);
+            if (exists != null) return new Book(exists);
 
             book.Id = _nextId++;
-            _books.Add(book);
+            _books.Add(new Book(book));
             return book;
         }
 
         public Book? Delete(int id)
         {
             Book? book = GetById(id);
-            if (book == null) throw new ArgumentNullException(nameof(book));
+            if (book == null) return null;
 
             return _books.Remove(book) ? book : null;
         }
 
         public IEnumerable<Book> Get(int minPrice = Book.PRICE_MIN, int maxPrice = Book.PRICE_MAX, SortMethod? sortMethod = null)
         {
-            throw new NotImplementedException();
+            IEnumerable<Book> result = _books.Where(b => b.Price >= minPrice && b.Price <= maxPrice);
+            result = sortMethod switch
+            {
+                SortMethod.TitleAscending => _books.OrderBy(b => b.Title),
+                SortMethod.TitleDescending => _books.OrderByDescending(b => b.Title),
+                SortMethod.PriceAscending => _books.OrderBy(b => b.Price),
+                SortMethod.PriceDescending => _books.OrderByDescending(b => b.Price),
+                _ => result
+            };
+            return result.ToList().ConvertAll(b => new Book(b));
         }
 
         public Book? GetById(int id)
         {
-            return _books.FirstOrDefault(b => b.Id == id);
+            Book? result = _books.FirstOrDefault(b => b.Id == id);
+            return result != null ? new Book(result) : null;
         }
 
-        public Book? Update(Book book)
+        public Book? Update(int id, Book values)
         {
-            throw new NotImplementedException();
+            Book? existing = _books.FirstOrDefault(b => b.Id == id);
+            if (existing == null) return null;
+
+            existing.Title = values.Title;
+            existing.Price = values.Price;
+            return new Book(existing);
         }
     }
 }
