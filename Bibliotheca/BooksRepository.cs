@@ -33,7 +33,7 @@ namespace Bibliotheca
 
         public IEnumerable<Book> Get(int minPrice = Book.PRICE_MIN, int maxPrice = Book.PRICE_MAX, SortMethod? sortMethod = null)
         {
-            IEnumerable<Book> result = _books.Where(b => b.Price >= minPrice && b.Price <= maxPrice);
+            IEnumerable<Book> result = _books.Where(b => ((b.Price >= minPrice) && (b.Price <= maxPrice)));
             result = sortMethod switch
             {
                 SortMethod.TitleAscending => _books.OrderBy(b => b.Title),

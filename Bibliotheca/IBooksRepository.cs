@@ -15,7 +15,7 @@ namespace Bibliotheca
     }
     public interface IBooksRepository
     {
-        public abstract IEnumerable<Book> Get(int minPrice, int maxPrice, SortMethod? sortMethod);
+        public abstract IEnumerable<Book> Get(int minPrice = Book.PRICE_MIN, int maxPrice = Book.PRICE_MAX, SortMethod? sortMethod = null);
         public abstract Book? GetById(int id);
         public abstract Book Add(Book book);
         public abstract Book? Delete(int id);

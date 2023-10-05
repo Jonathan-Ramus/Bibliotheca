@@ -42,13 +42,37 @@ namespace Bibliotheca.Tests
         [TestMethod()]
         public void DeleteTest()
         {
-            Assert.Fail();
+            Assert.IsNotNull(repository.Delete(3));
+            Assert.IsNull(repository.Delete(3));
         }
 
         [TestMethod()]
         public void GetTest()
         {
-            Assert.Fail();
+            var list1 = repository.Get();
+            var list2 = repository.Get(minPrice: 500);
+            var list3 = repository.Get(maxPrice: 500);
+            var list4 = repository.Get(sortMethod: SortMethod.PriceDescending);
+            var list5 = repository.Get(sortMethod: SortMethod.TitleDescending);
+            var list6 = repository.Get(sortMethod: SortMethod.PriceAscending);
+            var list7 = repository.Get(sortMethod: SortMethod.TitleAscending);
+            Assert.AreEqual(3, list1.Count());
+            Assert.AreEqual(2, list2.Count());
+            Assert.IsFalse(list2.Contains(book3));
+            Assert.AreEqual(1, list3.Count());
+            Assert.AreEqual(book3, list3.First());
+            Assert.AreEqual(3, list4.Count());
+            Assert.AreEqual(book2, list4.First());
+            Assert.AreEqual(book3, list4.Last());
+            Assert.AreEqual(3, list5.Count());
+            Assert.AreEqual(book3, list5.First());
+            Assert.AreEqual(book1, list5.Last());
+            Assert.AreEqual(3, list6.Count());
+            Assert.AreEqual(book3, list6.First());
+            Assert.AreEqual(book2, list6.Last());
+            Assert.AreEqual(3, list7.Count());
+            Assert.AreEqual(book1, list7.First());
+            Assert.AreEqual(book3, list7.Last());
         }
 
         [TestMethod()]
